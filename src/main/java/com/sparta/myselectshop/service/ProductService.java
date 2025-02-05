@@ -48,6 +48,8 @@ public class ProductService {
         return new ProductResponseDto(product);
     }
 
+    // 지연로딩 사용하기 위해서는 영속성 컨텍스트가 필요(@Transactional) & 성능을 높이기 위해서(readOnly = true)
+    @Transactional(readOnly = true)
     public Page<ProductResponseDto> getProducts(User user, int page, int size, String sortBy, boolean isAsc) {
         Sort.Direction direction = isAsc ? Sort.Direction.ASC : Sort.Direction.DESC;
         Sort sort = Sort.by(direction, sortBy);
